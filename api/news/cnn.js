@@ -14,10 +14,9 @@ router.get('/search/:artikel/:page', (req, res) => {
       let myArr = [];
        $("article").each((i, element) => {
           myArr.push({
+            image: $(element).find("img").attr("src"),
             link: $(element).find("a").attr("href"),
             title: $(element).find("h2.title").text(),
-            tanggal: $(element).find("span.box_text > span.date").text()
-            // deskripsi: $(element).find("p").text(),
           })
         })
        

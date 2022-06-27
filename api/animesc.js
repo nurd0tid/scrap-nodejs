@@ -13,6 +13,7 @@ router.get('/:judul', (req, res) => {
       let myArr = [];
        $("div.post-body").each((i, element) => {
           myArr.push({
+            image: $(element).find("img").attr("src"),
             linkBacth: $(element).find("div.listbatch > a").attr("href"),
             judul: $(element).find("h1.entry-title").text(),
             deskripsi: $(element).find("div.desc").text(),

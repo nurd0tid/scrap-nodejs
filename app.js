@@ -7,6 +7,7 @@ const apiRouter = require('./api/news/detik')
 const api1Router = require('./api/news/cnn')
 const api2Router = require('./api/animesc')
 const api3Router = require('./api/kbbi')
+const api4Router = require('./api/quran')
 
 
 
@@ -20,6 +21,7 @@ app.use('/api/detik', apiRouter)
 app.use('/api/cnn', api1Router)
 app.use('/api/anime-search/', api2Router)
 app.use('/api/kbbi/', api3Router)
+app.use('/api/quran/', api4Router)
 
 app.listen(8080);
 console.log('8080 is the magic port');

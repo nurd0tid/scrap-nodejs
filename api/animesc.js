@@ -1,23 +1,27 @@
-const axios = require("axios");
 const cheerio = require("cheerio");
+const express = require('express')
+const router = express.Router()
 
-axios({
-  method: "GET",
-  url: "https://194.163.183.129/anime/princess-connect-re-dive-season-2/",
-  headers: {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
-  }
-}).then(res => {
-  const $ = cheerio.load(res.data);
-  let myArr = [];
-  $("div.post-body").each((i, el) => {
-    myArr.push({
-      judul: $(el).find("h1.entry-title").text(),
-      deskripsi: $(el).find("div.desc").text(),
-      linkBacth: $(el).find("div.listbatch > a").attr("href"),
+router.get('/:judul', (req, res) => {
+    const judul = req.params.judul
+    var axios = require('axios');
+
+    axios.get(`https://194.163.183.129/anime/${judul}`).then((data) => {
+      const html = data.data;
+      const $ = cheerio.load(html)
+      
+      let myArr = [];
+       $("div.post-body").each((i, element) => {
+          myArr.push({
+            linkBacth: $(element).find("div.listbatch > a").attr("href"),
+            judul: $(element).find("h1.entry-title").text(),
+            deskripsi: $(element).find("div.desc").text(),
+          })
+        })
+       
+        res.status(200).json({ success: true, data: myArr });
+
     })
-  })
-  console.log(myArr);
-}).catch(err => {
-  console.log(err);
 })
+
+module.exports = router

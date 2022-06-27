@@ -16,7 +16,7 @@ router.get('/:keyword', (req, res) => {
             link: $(element).find("a.link-kata").attr("href"),
             // tanggal: $(element).find("span.date").text().split(",")[1].trim(),
             // title: $(element).find("h2.title").text(),
-            deskripsi: $(element).find("#d1").text(),
+            deskripsi: $(element).find("#d1").text().split("\n\t\t\t\t\t")[1].trim(),
           })
         })
        
